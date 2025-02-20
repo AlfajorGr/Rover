@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rover Mars</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="control-panel">
+        <img onclick="clickBtnRotateLeft()" class="btn-control" src="img/left.png" style=" width: 100px;" />
+        <img onclick="moveForward()" class="btn-control" src="img/delante.png" style=" width: 100px;" />
+        <img onclick="moveBack()" class="btn-control" src="img/down.png" style=" width: 100px;" />
+        <img onclick="clickBtnRotateRight()" class="btn-control" src="img/rotate.png" style=" width: 100px;" />
+    </div>
+
+    <div id="container">
+        <img id="rover" src="img/robot.png" />
+        <div id="map">
+            <img src="img/mars.png" />
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

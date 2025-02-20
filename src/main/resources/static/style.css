@@ -1,0 +1,28 @@
+#rover {
+    position: absolute;
+    width: 100px;
+    transition: all 500ms linear;
+}
+
+.rock {
+    position: absolute;
+    width: 100px;
+    margin-top: 22px;
+}
+
+#control-panel {
+    position: absolute;
+    z-index: 10;
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+    opacity: 0.8;
+    bottom: 10px;
+    left: calc(50% -160px);
+    margin-left: 470px;
+}
+
+#control-panel .btn-control{
+    width: 80px;
+    cursor: pointer;
+}
