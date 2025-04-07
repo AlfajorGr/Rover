@@ -5,28 +5,29 @@ import academy.atl.rover.dto.RoverDto;
 import academy.atl.rover.models.Rover;
 import academy.atl.rover.services.RoverService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class RoverController {
 
     @Autowired
     private RoverService roverService;
 
-    @GetMapping("api/rover/")
+    @GetMapping("/rover")
+    @CrossOrigin(origins = "http://localhost:63342")
     public Rover get(){
         return roverService.get();
     }
 
-    @PostMapping("api/rover/")
+    @PostMapping("/rover")
+    @CrossOrigin(origins = "http://localhost:63342")
     public void create(@RequestBody RoverDto rover){
 
     }
 
-    @PostMapping("api/rover/command/")
+    @PostMapping("/rover/command")
+    @CrossOrigin(origins = "http://localhost:63342")
     public void sendCommand(@RequestBody CommandDto commands){
 
         for (String command:commands.getCommands()){

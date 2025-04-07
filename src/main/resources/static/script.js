@@ -5,7 +5,7 @@ async function createMap(){
     refreshRover();
 
     //Obtener info de los obstaulo
-    let obstacleResponse = await fetch('/api/obstacle/', {
+    let obstacleResponse = await fetch('http://localhost:8080/api/obstacle', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -18,7 +18,7 @@ async function createMap(){
 }
 
 async function refreshRover(){
-    let roverResponse = await fetch('/api/rover/', {
+    let roverResponse = await fetch('http://localhost:8080/api/rover', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ async function sendCommand(command){
         "commands": [command]
     };
 
-    await fetch('/api/rover/command/', {
+    await fetch('http://localhost:8080/api/rover/command', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
