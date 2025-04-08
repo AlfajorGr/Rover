@@ -47,17 +47,20 @@ function createRock(x, y){
 var posX = 0;
 var posY = 0;
 
-function clickBtnRotateLeft() {
-    sendCommand("L")
+function moveUp() {
+    sendCommand("F");  // Avanza hacia arriba si está mirando hacia el norte
 }
 
-function clickBtnRotateRight() {
-    sendCommand("R");
+function moveDown() {
+    sendCommand("B");  // Retrocede hacia abajo si está mirando hacia el sur
 }
 
-async function moveForward() {
-    sendCommand("F");
+function moveLeft() {
+    sendCommand("L");  // Gira hacia la izquierda
+}
 
+function moveRight() {
+    sendCommand("R");  // Gira hacia la derecha
 }
 
 async function sendCommand(command){
@@ -73,9 +76,5 @@ async function sendCommand(command){
         body: JSON.stringify(requestBody)
     });
 
-    await refreshRover();
-}
-
-function moveBack() {
-    sendCommand("B");
+    await refreshRover();  // Refresca la posición del rover después de cada comando
 }
