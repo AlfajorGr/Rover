@@ -13,7 +13,7 @@ public enum Direction {
         }
     }
 
-    // Girar a la derecha
+    // Función para girar a la derecha (rotación en sentido horario)
     public Direction turnRight() {
         switch (this) {
             case NORTH: return EAST;

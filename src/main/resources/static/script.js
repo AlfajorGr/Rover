@@ -25,13 +25,37 @@ async function refreshRover(){
         }
     });
     let roverJson = await roverResponse.json();
-    moveRover(roverJson.x, roverJson.y);
+    console.log("Dirección del rover:", roverJson.direction);  // Verifica la dirección
+    moveRover(roverJson.x, roverJson.y, roverJson.direction);  // Actualiza la posición y dirección
 }
 
-function moveRover(x, y){
-    document.getElementById("rover").style.left = (x * 100) + 'px';
-    document.getElementById("rover").style.top = (y * 100) + 'px';
+
+function moveRover(x, y, direction){
+    // Aplica rotación del rover en la interfaz dependiendo de la dirección
+    let roverElement = document.getElementById("rover");
+
+    switch(direction) {
+        case "NORTH":
+            roverElement.style.transform = "rotate(0deg)";  // Norte (sin rotación)
+            break;
+        case "EAST":
+            roverElement.style.transform = "rotate(90deg)";  // Este
+            break;
+        case "SOUTH":
+            roverElement.style.transform = "rotate(180deg)";  // Sur
+            break;
+        case "WEST":
+            roverElement.style.transform = "rotate(270deg)";  // Oeste
+            break;
+    }
+
+    // Mueve al rover según la nueva posición
+    roverElement.style.left = (x * 100) + 'px';
+    roverElement.style.top = (y * 100) + 'px';
 }
+
+
+
 
 function createRock(x, y){
     var rock = document.createElement("img");
@@ -51,14 +75,17 @@ function moveUp() {
     sendCommand("F");  // Avanza hacia arriba si está mirando hacia el norte
 }
 
+// Función de mover hacia atrás
 function moveDown() {
     sendCommand("B");  // Retrocede hacia abajo si está mirando hacia el sur
 }
 
+// Función de girar a la izquierda
 function moveLeft() {
     sendCommand("L");  // Gira hacia la izquierda
 }
 
+// Función de girar a la derecha
 function moveRight() {
     sendCommand("R");  // Gira hacia la derecha
 }
@@ -74,7 +101,22 @@ async function sendCommand(command){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(requestBody)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+        }
+        return response.json();  // Procesamos la respuesta como JSON
+    })
+    .then(data => {
+        console.log("Respuesta del servidor:", data);
+        // Actualizamos la interfaz con la nueva posición
+        moveRover(data.x, data.y);
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
 
     await refreshRover();  // Refresca la posición del rover después de cada comando
 }
+

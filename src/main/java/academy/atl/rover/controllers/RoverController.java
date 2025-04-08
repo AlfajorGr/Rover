@@ -5,6 +5,7 @@ import academy.atl.rover.dto.RoverDto;
 import academy.atl.rover.models.Rover;
 import academy.atl.rover.services.RoverService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,11 +29,12 @@ public class RoverController {
 
     @PostMapping("/rover/command")
     @CrossOrigin(origins = "http://localhost:63342")
-    public void sendCommand(@RequestBody CommandDto commands){
-
-        for (String command:commands.getCommands()){
+    public ResponseEntity<Rover> sendCommand(@RequestBody CommandDto commands){
+        for (String command : commands.getCommands()) {
             roverService.sendCommand(command);
             System.out.printf(command);
         }
+        Rover rover = roverService.get();  // Obtener la última posición y dirección del rover
+        return ResponseEntity.ok(rover);  // Devolver la respuesta como un JSON
     }
 }
